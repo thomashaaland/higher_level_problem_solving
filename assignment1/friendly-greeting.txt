@@ -1,1 +1,1 @@
-This is a friendly greeting
+This is not a friendly greeting, but quite hostile instead!
