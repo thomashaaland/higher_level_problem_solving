@@ -12,7 +12,7 @@ bash.sh is a small script designed to move files from one directory to another.
 
 ### Missing Functionality
 
-The script won't create a directory for you if the destination directory don't already exist.
+Cannot choose to add date to destination directory
 
 ### Usage
 
@@ -21,6 +21,8 @@ To transfer files from directory_A to directory_B use the following commands
 ```bash
 ./move.sh directory_A directory_B
 ```
+
+If the destination directory does not exit you will be promted if you want to create the directory.
 
 ```bash
 ./move.sh $HOME/directories/directory_A $HOME/other_directories/directory_B
