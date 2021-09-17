@@ -54,11 +54,20 @@ class Array:
             str: A string representation of the array.
 
         """
-        arr_str = "["
-        for val in self._arr[:-1]:
-            arr_str += (str(val) + ", ")
-        arr_str += (str(self._arr[-1]) + "]")
-        return arr_str
+        def iterate_over_i(dims, arr):
+            arr_str = "["
+            if len(dims) > 1:
+                for i in range(dims[0]-1):
+                    arr_str += iterate_over_i(dims[1:], Array(dims[1:], *(arr[i]._arr))) + ", "
+                arr_str += iterate_over_i(dims[1:], Array(dims[1:], *(arr[i+1]._arr)))
+            else:
+                for i in range(dims[0]-1):
+                    arr_str += str(arr[i]) + ", "
+                arr_str += str(arr[i+1])
+            return arr_str + "]"
+
+        return iterate_over_i(self._shape, self)
+    
         
     def __add__(self, other):
         """Element-wise adds Array with another Array or number.
@@ -265,9 +274,25 @@ class Array:
         Raises:
             IndexOutOfBoundsError: if the index is out of bounds.
         """
-        # Special case for 1d array
+        
+        # Special case for single input index
         if isinstance(*indices, int):
-            return float(self._arr[indices[0]])
+            i = indices[0]
+            if i > self._shape[0]:
+                raise IndexError("Index out of range")
+            if len(self._shape) == 1:
+                return float(self._arr[i])
+            else:
+                top_dim = self._shape[0]
+                rest_dim = self._shape[1:]
+                dim_jump = 1
+                for arg in rest_dim:
+                    dim_jump *= arg
+
+                start_i = dim_jump * i
+                end_i = start_i + dim_jump
+                return Array(rest_dim, *self._arr[start_i : end_i])
+        
 
         # Otherwise
         indices = indices[0]
@@ -277,7 +302,6 @@ class Array:
             if shape_ind <= access_ind:
                 raise IndexError("Index out of bounds")
 
-        print("The shapes of indices are: ", self._shape, indices)
         # for 2d: assume 3x4: fetch 2,3: 2*3 + 3
         # for n, m: fetch element a, b: n*a + b
         # Implement for contigous list:
@@ -296,5 +320,4 @@ class Array:
             i += indices[dim-1]*cumdims
         i += indices[-1]
             
-        print(f"Final index is: {i}")
         return float(self._arr[i])

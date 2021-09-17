@@ -33,7 +33,12 @@ def test_make_array():
 def test_str():
     # Test to see if the output is good for a 1d array
     arr1 = Array((4,), 1, 2, 3, 4)
-    assert arr1.__str__() == "[1, 2, 3, 4]"
+    assert arr1.__str__() == "[1.0, 2.0, 3.0, 4.0]"
+
+    # Test to see if the output is good for a 2d array
+    arr2 = Array((2,2), 1, 2, 3, 4)
+    print(arr2)
+    assert arr2.__str__() == "[[1.0, 2.0], [3.0, 4.0]]"
     
 def test_getitem_1d():
     # Test to see if we can get an item from a 1d array
@@ -43,6 +48,12 @@ def test_getitem_1d():
     assert arr[1] == 2
     assert arr[2] == 3
     assert arr[3] == 4
+
+    arr2d = Array((2,2), 1, 2, 3, 4)
+    assert arr2d[0][0] == 1
+    assert arr2d[0,0] == 1
+    assert arr2d[1][0] == 3
+    assert arr2d[1,0] == 3
 
 def test_getitem_2d():
     # test to see if we can get an item from a 2d array
