@@ -1,0 +1,154 @@
+#!/usr/bin/env python
+
+import numpy as np
+import matplotlib.pyplot as plt
+import cv2
+import instapy.grayscale_image as c2g
+import instapy.sepia_image as c2s
+import argparse
+
+greeting ="""
+Welcome to
+
+IIII N  N  SSS  TTTTTT   A    PPPP   Y   Y
+ II  NN N S   S   TT    A A   P   P  Y   Y
+ II  N NN  SS     TT   A   A  P  P   Y   Y
+ II  N  N    SS   TT   AAAAA  PPP     Y Y
+ II  N  N S   S   TT   A   A  P        Y
+IIII N  N  SSS    TT   A   A  P        Y
+
+Use -h for help.
+
+To get started use:
+
+$ instapy -f FILENAME [-se]/[-g]
+
+To convert an image to sepia or grayscale.
+More options can be found with
+
+$ instapy -h
+"""
+
+def check_float_and_range(number):
+    """Checks if the value given is a float and is between 0 and 1.
+    Args:
+        number (float): Argument to check.
+    
+    Returns:
+        :float:
+             Returns the number if the number can be interpreted as float
+             and is between 0 and 1. Raises an exception otherwise.
+    """
+    try:
+        n = float(number)
+    except ValueError:
+        raise argparse.ArgumentTypeError("Please provide a floatingpoint number")
+    if n < 0 or n > 1:
+        raise argparse.ArgumentTypeError("Argument must be 0 or more and 1 or less")
+    return n
+
+
+def main():
+    # Start the argument parser.
+    parser = argparse.ArgumentParser() 
+
+    # Grab the filename of the image to have the filter applied to.
+    parser.add_argument("-f", "--file",
+                        required=True,
+                        help="<REQUIRED> The filename of the file to apply the filter to.")
+
+    # Switch for sepia.
+    parser.add_argument("-se", "--sepia",
+                        help="Select the sepia filter",
+                        action="store_true")
+
+    # Stepless application of sepia
+    parser.add_argument("-st", "--stepless_sepia",
+                        type=check_float_and_range,
+                        help="Include this to choose amount of sepia applied. Between 0 and 1.")
+    
+    # Switch for grayscale.
+    parser.add_argument("-g", "--gray",
+                         help="Select the gray filter",
+                         action="store_true")
+
+    # If this is included apply scaling.
+    parser.add_argument("-sc", "--scale",
+                        help="Scale factor to resize the image",
+                        type=float)
+
+    # Select between pure Python, numpy and numba implementations.
+    parser.add_argument("-i", "--implement",
+                        default="numpy",
+                        choices=["python", "numpy", "numba"],
+                        help="Choose the implementation.")
+
+    # Option to write file to disk with custom filename.
+    parser.add_argument("-o", "--out",
+                        nargs='*',
+                        help="The output filename. If this is not specified a new file is saved at the same location as {filename}_filter.jpg. Give one filename for each filter you want to apply.")
+
+    # Finish the parser.
+    args = parser.parse_args()
+
+    # Collect the filename.
+    if args.file:
+        filename = args.file
+        
+    # Collect filters.
+    # Collectors for filters.
+    funcs = []
+    sepia_effect = None
+    
+    # If sepia is switched on make an image with sepia filter.
+    if args.sepia:
+        funcs.append(c2s.sepia_image)
+
+    # If sepia has been selected, use this to vary the magnitude of the effect.
+    if args.stepless_sepia:
+        sepia_effect = args.stepless_sepia
+    else:
+        sepia_effect = 1
+        
+    # If gray is switched on make an image grayscale.
+    if args.gray:
+        funcs.append(c2g.grayscale_image)
+
+    # Collect scaling. If neither sepia nor grayscale is turned on just make a rescaled image.
+    if args.scale:
+        if not funcs:
+            funcs.append(c2s.sepia_image)
+            sepia_effect = 0
+        scale = args.scale
+    else:
+        scale = 1
+        
+    # If neither sepia, gray nor scale is switched on, raise an error.
+    if not funcs:
+        parser.error("You need to specify filter. To add sepia use [-se] and for grayscale use [-g]. You can add both [-se] and [-g]. You can also scale an image with [-sc SCALE].")
+        
+
+    # Collect implementation.
+    if args.implement:
+        implementation = args.implement
+    else:
+        implementation = "numpy"
+
+    # Collect custom filename.
+    if args.out:
+        if len(args.out) == len(funcs):
+            output_filenames = args.out
+        else:
+            parser.error("""If you use custom filenames you must provide one filename for each filter you use. 
+If you use both sepia and grayscale you need two filenames. The grayscale filter is applied first.""")
+    else:
+        output_filenames = [None] * len(funcs)
+
+    # Run each called function, grayscale, sepia and plain resize.
+    for func, out in zip(funcs, output_filenames):
+        func(filename, out,
+             implementation, scale, sepia_effect)
+        
+# Run this if this script is called directly.
+if __name__ == "__main__":
+    main()

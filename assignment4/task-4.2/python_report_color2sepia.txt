@@ -1,0 +1,7 @@
+
+Timing: python_color2sepia
+Average runtime running python_color2gsepia after 5 runs: 6.57 s
+Timing performed using: timeit module
+Dimensions of original image: (400, 600, 3)
+Dimensions of sepia image: (400, 600, 3)
+            

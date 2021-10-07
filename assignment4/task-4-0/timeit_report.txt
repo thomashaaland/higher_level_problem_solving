@@ -1,0 +1,14 @@
+Timeit module
+Slowest times:
+Making array:  0.0139s
+Snake loop:    2.7892s
+Loop:          0.2577s
+
+snake_loop is slowest with time:  2.7892s
+
+Compared to manual timing we got a similar result.
+The times for making the array is a bit less than in 
+manual timing, but the Snake loop and loop are very similar.
+This could indicate manual timing has a bit more overhead
+compared to timeit, or it could be random. This is very hard
+to say without more indepth statistics.

@@ -1,0 +1,7 @@
+Manual timing
+Slowest times:
+Making array:  0.0022s
+Snake loop:    0.2713s
+Loop:          0.0266s
+
+snake_loop is slowest with time:  0.2713s

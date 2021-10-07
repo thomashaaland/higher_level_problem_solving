@@ -1,0 +1,7 @@
+
+Timing: python_color2gray
+Average runtime running python_color2gray after 5 runs: 4.71 s
+Timing performed using: timeit module
+Dimensions of original image: (400, 600, 3)
+Dimensions of grayscale image: (400, 600)
+            

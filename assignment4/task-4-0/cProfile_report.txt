@@ -1,0 +1,19 @@
+         5778 function calls in 0.284 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 cProfile.py:117(__exit__)
+        1    0.025    0.025    0.025    0.025 cProfile_timing_.py:12(loop)
+        1    0.256    0.256    0.257    0.257 cProfile_timing_.py:28(snake_loop)
+        1    0.000    0.000    0.002    0.002 cProfile_timing_.py:5(random_array)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        2    0.001    0.001    0.001    0.001 {built-in method numpy.array}
+     5768    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.002    0.002    0.002    0.002 {method 'rand' of 'numpy.random.mtrand.RandomState' objects}
+
+With the cProfile module we see more detail than previously. For example, making a random array
+takes two calls from numpy.array which together accounts for the time spent by random_array.
+Again snake_loop is much slower. Otherwise the times presented here are similar to the times 
+found in timeit_timing_.py and manual_timing_.py.
