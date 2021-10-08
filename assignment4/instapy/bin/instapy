@@ -80,7 +80,7 @@ def main():
     # Select between pure Python, numpy and numba implementations.
     parser.add_argument("-i", "--implement",
                         default="numpy",
-                        choices=["python", "numpy", "numba"],
+                        choices=["python", "numpy", "numba", "cython"],
                         help="Choose the implementation.")
 
     # Option to write file to disk with custom filename.

@@ -1,6 +1,7 @@
 import numpy as np
-import cv2
 from numba import jit
+import cv2
+import sys
 
 def python_color2sepia(image, sepia_effect = 1):
     """Function to turn an image from rgb color to sepia. 
