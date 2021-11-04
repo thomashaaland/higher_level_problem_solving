@@ -23,11 +23,11 @@ Example:
     ['https://base.path/relative/path', 'https://other.host/same-protocol', 'https://example.com']
     """
 
-    # Pattern explanation: Match everything not greedily from '<a href' up to but not
-    # including '"' or '#', and group '<a href="' to group 1 and everything
-    # else into group 2.
-    #pattern = r"(?:<a .*href=\")(.*?)(?=[\"#])"
-    pattern = r'(?:<a\s.*?href=")(.*?)(?:[";&#])' # ?
+    # Pattern explanation: Match everything not greedily from '<a '
+    # including 'href="', and group everything not greedily until the
+    # characters [", ;, & or #] is encountered
+    # This is designed to capture links not including optional parameters
+    pattern = r'(?:<a\s.*?href=")(.*?)(?:["#])'
     search_results = re.findall(pattern, html_str)
     
     search_results = [result for result in search_results if result != '']
@@ -52,6 +52,7 @@ Example:
 
     if output is not None:
         with open(output, 'w') as f:
+            print(f"Writing file {output}")
             for result in results:
                 f.write(result + '\n')
             
