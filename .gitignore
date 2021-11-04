@@ -9,7 +9,7 @@
 
 # Ignore specific cython build directories.
 assignment4/task-4.1/build/*
-
+assignment4/task-4.2/build/*
 
 # Ignore temporary and swap files.
 *~
