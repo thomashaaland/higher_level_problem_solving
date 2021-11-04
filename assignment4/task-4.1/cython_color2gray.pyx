@@ -1,10 +1,13 @@
-# -*- coding: utf-8 -*-
+# cython: language_level=2
 import numpy as np
 cimport numpy as np
-import cython
+cimport cython
 import ctypes
 
-cpdef cython_color2gray(np.ndarray[np.uint8_t, ndim=3, cast = True] image):
+DTYPE = np.uint8
+ctypedef np.uint8_t DTYPE_t
+
+def cython_color2gray(np.ndarray[DTYPE_t, ndim=3] img):
     """Function to turn an image from rgb color to grayscale. It also times
         the time. This version is to be compiled with cython for speed.
     
@@ -19,15 +22,21 @@ cpdef cython_color2gray(np.ndarray[np.uint8_t, ndim=3, cast = True] image):
              been merged into a single grayscale channel. 
              
     """
-    cdef int i, j
-    cdef int w, h
-    w = image.shape[0]
-    h = image.shape[1]
-    cdef np.ndarray[np.uint8_t, ndim=2] final_image = np.empty((w,h), dtype='uint8')
-
+    
+    if img.shape[2] != 3:
+            raise ValueError("You need to provide a color image.")
+    assert img.dtype == DTYPE
+    
+    cdef Py_ssize_t i = 0
+    cdef Py_ssize_t j = 0
+    cdef unsigned int w = img.shape[0]
+    cdef unsigned int h = img.shape[1]
+    cdef double result = 0
+    cdef np.ndarray[DTYPE_t, ndim=2] final_img = np.empty([w,h], dtype=DTYPE)
+    
     for i in range(w):
         for j in range(h):
-            final_image[i][j] = ( (float)(image[i][j][0])*0.21 + (float)(image[i][j][1])*0.72 + (float)(image[i][j][2])*0.07 ) 
-
+            result = img[i, j, 0]*0.21 + img[i, j, 1]*0.72 + img[i, j, 2]*0.07
+            final_img[i, j] = <DTYPE_t>result 
     
-    return final_image
+    return final_img
