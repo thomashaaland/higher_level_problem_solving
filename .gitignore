@@ -1,7 +1,13 @@
-# ignore all logs
+# Ignore all logs.
 *.log
 
-# ignore cython compilation files
+# Ignore cython compilation files.
 *.c
 *.so
 *.html
+
+# Ignore specific cython build directories.
+assignment4/task-4.1/build/*
+
+# Ignore temporary and swap files.
+*~
