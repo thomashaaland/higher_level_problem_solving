@@ -1,10 +1,10 @@
-https://en.wikipedia.org/w/index.php?title=Main
-https://en.wikipedia.org/w/index.php?title=Main
+https://en.wikipedia.org/w/index.php?title=Main&amp;oldid=11063534
+https://en.wikipedia.org/w/index.php?title=Main&amp;oldid=1049728935
 https://en.wikipedia.org/wiki/Main
 https://en.wikipedia.org/wiki/Main
 https://en.wikipedia.org/wiki/Main
-https://en.wikipedia.org/w/index.php?title=Main
-https://en.wikipedia.org/w/index.php?title=Main
+https://en.wikipedia.org/w/index.php?title=Main&amp;action=edit
+https://en.wikipedia.org/w/index.php?title=Main&amp;action=history
 https://en.wikipedia.org/wiki/Main_Page
 https://en.wikipedia.org/wiki/Main_Page
-https://en.wikipedia.org/w/index.php?title=Main
+https://en.wikipedia.org/w/index.php?title=Main&amp;action=info

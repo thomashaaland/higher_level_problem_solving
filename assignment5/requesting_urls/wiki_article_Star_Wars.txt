@@ -192,6 +192,7 @@ https://en.wikipedia.org/wiki/The_Mandalorian
 https://en.wikipedia.org/wiki/The_Mandalorian
 https://en.wikipedia.org/wiki/The_Book_of_Boba_Fett
 https://en.wikipedia.org/wiki/List_of_Star_Wars_television_series
+https://en.wikipedia.org/wiki/The_Book_of_Boba_Fett
 https://en.wikipedia.org/wiki/American_Broadcasting_Company
 https://en.wikipedia.org/wiki/Ewoks_(TV_series)
 https://en.wikipedia.org/wiki/Cartoon_Network
@@ -207,7 +208,7 @@ https://en.wikipedia.org/wiki/Star_Wars_Forces_of_Destiny
 https://en.wikipedia.org/wiki/Star_Wars_Galaxy_of_Adventures
 https://en.wikipedia.org/wiki/Star_Wars_Roll_Out
 https://en.wikipedia.org/wiki/The_Mandalorian
-https://en.wikipedia.org/w/index.php?title=Star_Wars
+https://en.wikipedia.org/w/index.php?title=Star_Wars&amp;action=edit
 https://en.wikipedia.org/wiki/Ewok
 https://en.wikipedia.org/wiki/The_Ewok_Adventure
 https://en.wikipedia.org/wiki/John_Korty
@@ -215,7 +216,7 @@ https://en.wikipedia.org/wiki/George_Lucas
 https://en.wikipedia.org/wiki/American_Broadcasting_Company
 https://en.wikipedia.org/wiki/Ken_and_Jim_Wheats
 https://en.wikipedia.org/wiki/Ian_Bryce
-https://en.wikipedia.org/w/index.php?title=Star_Wars
+https://en.wikipedia.org/w/index.php?title=Star_Wars&amp;action=edit
 https://en.wikipedia.org/wiki/Star_Wars_Holiday_Special
 https://en.wikipedia.org/wiki/Steve_Binder
 https://en.wikipedia.org/wiki/Pat_Proft
@@ -390,7 +391,7 @@ https://en.wikipedia.org/wiki/Star_Wars_Hyperspace_Mountain
 https://en.wikipedia.org/wiki/Star_Wars_Launch_Bay
 https://en.wikipedia.org/wiki/Disneyland
 https://en.wikipedia.org/wiki/Walt_Disney_World
-https://en.wikipedia.org/w/index.php?title=Star_Wars
+https://en.wikipedia.org/w/index.php?title=Star_Wars&amp;action=edit
 https://en.wikipedia.org/wiki/Star_Tours
 https://en.wikipedia.org/wiki/Disneyland
 https://en.wikipedia.org/wiki/Tokyo_Disneyland
@@ -1737,7 +1738,7 @@ https://en.wikipedia.org/wiki/Furby
 https://en.wikipedia.org/wiki/G.I._Joe
 https://en.wikipedia.org/wiki/Glo_Worm
 https://en.wikipedia.org/wiki/Gobots
-https://en.wikipedia.org/w/index.php?title=Junior_Squad
+https://en.wikipedia.org/w/index.php?title=Junior_Squad&amp;action=edit&amp;redlink=1
 https://en.wikipedia.org/wiki/Jem_(TV_series)
 https://en.wikipedia.org/wiki/Koosh_ball
 https://en.wikipedia.org/wiki/Kre-O
@@ -1896,14 +1897,14 @@ https://en.wikipedia.org/wiki/Hasbro_Universe
 https://en.wikipedia.org/wiki/Hasbro_Comic_Book_Universe
 https://en.wikipedia.org/wiki/Galoob
 https://en.wikipedia.org/wiki/SUDOC_(identifier)
-https://en.wikipedia.org/w/index.php?title=Star_Wars
+https://en.wikipedia.org/w/index.php?title=Star_Wars&amp;oldid=1053369870
 https://en.wikipedia.org/wiki/Star_Wars
 https://en.wikipedia.org/wiki/Star_Wars
-https://en.wikipedia.org/w/index.php?title=Star_Wars
-https://en.wikipedia.org/w/index.php?title=Star_Wars
+https://en.wikipedia.org/w/index.php?title=Star_Wars&amp;action=edit
+https://en.wikipedia.org/w/index.php?title=Star_Wars&amp;action=history
 https://en.wikipedia.org/wiki/Main_Page
 https://en.wikipedia.org/wiki/Main_Page
-https://en.wikipedia.org/w/index.php?title=Star_Wars
-https://en.wikipedia.org/w/index.php?title=Star_Wars
-https://en.wikipedia.org/w/index.php?title=Star_Wars
+https://en.wikipedia.org/w/index.php?title=Star_Wars&amp;oldid=1053369870
+https://en.wikipedia.org/w/index.php?title=Star_Wars&amp;action=info
+https://en.wikipedia.org/w/index.php?title=Star_Wars&amp;printable=yes
 https://no.wikipedia.org/wiki/Star_Wars
