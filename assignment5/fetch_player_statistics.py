@@ -90,6 +90,11 @@ def extract_players(team_url):
             to the team whos URL was passed.
         player_urls (list): A list of Wikipedia URLs corresponding 
             to player_names of the team whos URL was passed.
+    
+Example:
+    >>> example_team = 'https://en.wikipedia.org/wiki/Toronto_Raptors'
+    >>> extract_players(example_team)
+    (['Precious Achiuwa', 'Anunoby', 'Dalano Banton', 'Scottie Barnes', 'Khem Birch', 'Isaac Bonga', 'Chris Boucher', 'Justin Champagnie', 'Sam Dekker', 'Goran Dragi', 'Malachi Flynn', 'David Johnson', 'Sviatoslav Mykhailiuk', 'Pascal Siakam', 'Gary Trent Jr.', 'Fred Van Vleet', 'Yuta Watanabe'], ['https://en.wikipedia.org/wiki/Precious_Achiuwa', 'https://en.wikipedia.org/wiki/OG_Anunoby', 'https://en.wikipedia.org/wiki/Dalano_Banton', 'https://en.wikipedia.org/wiki/Scottie_Barnes', 'https://en.wikipedia.org/wiki/Khem_Birch', 'https://en.wikipedia.org/wiki/Isaac_Bonga', 'https://en.wikipedia.org/wiki/Chris_Boucher_(basketball)', 'https://en.wikipedia.org/wiki/Justin_Champagnie', 'https://en.wikipedia.org/wiki/Sam_Dekker', 'https://en.wikipedia.org/wiki/Goran_Dragi%C4%87', 'https://en.wikipedia.org/wiki/Malachi_Flynn', 'https://en.wikipedia.org/wiki/David_Johnson_(basketball)', 'https://en.wikipedia.org/wiki/Sviatoslav_Mykhailiuk', 'https://en.wikipedia.org/wiki/Pascal_Siakam', 'https://en.wikipedia.org/wiki/Gary_Trent_Jr.', 'https://en.wikipedia.org/wiki/Fred_VanVleet', 'https://en.wikipedia.org/wiki/Yuta_Watanabe'])
     """
 
     # keep base url
@@ -97,11 +102,18 @@ def extract_players(team_url):
 
     # get html for each page using the team url you extracted before
     html = get_html(team_url)
-
+    
     # make soup
     soup = BeautifulSoup(html, "html.parser")
     # get the header of the Roster
     roster_header = soup.find(id="Roster")
+    # Alternate roster header
+    if not roster_header:
+        roster_header = soup.find(id="Current_roster")
+        # If it still id not found return failed attempt
+        if not roster_header:
+            return [], []
+            
     # identify table
     roster_table = roster_header.find_next("table")
     rows = roster_table.find_all("tr")
@@ -122,8 +134,9 @@ def extract_players(team_url):
             # until the end OR everything. This creates a tuple which
             # needs to be joined with the empty string ''.
             # Fetch the name. Group words starting with a capital letter
-            # followed by any number of one or more lowercase letter.
-            reg_fetch_name = r"(?:[A-Z][a-z]+)"
+            # followed by any number of one or more lowercase letter. 
+            # Only works for english characters!
+            reg_fetch_name = r"(?:[A-Z][a-z.]+)"
             # Create urls and name to each player
             # Need to join inner tuple with the empty string ''
             # Need to join list with one space.
@@ -142,9 +155,15 @@ def extract_player_statistics(player_url):
         player_url (str): URL to the Wikipedia article of a player.
 
     Returns:
+        A tuple with the elements
         ppg (float): Points per Game
         bpg (float): Blocks per Game
         rpg (float): Rebounds per Game
+
+Example:
+    >>> example_player = 'https://en.wikipedia.org/wiki/Kyrie_Irving'
+    >>> extract_player_statistics(example_player)
+    (22.8, 0.4, 3.8)
     """
     # As some players have incomplete statistics/information, let's
     # set a default score.
@@ -161,7 +180,7 @@ def extract_player_statistics(player_url):
 
     # find header of NBA career statistics
     nba_header = soup.find(id="Career_statistics")
-
+    
     # Check for a few alternative names of header
     if nba_header is None:
         nba_header = soup.find(id="NBA_career_statistics")
@@ -305,6 +324,8 @@ def plot_NBA_player_statistics(teams, stat = "PPG"):
     plt.savefig("./NBA_player_statistics/players_over_" + stat.lower() + ".png")
 
 if __name__ =="__main__":
+    import doctest
+    doctest.testmod()
     # Extract teams along their urls
     teams, team_urls = extract_teams()
     # Make a dictionary to hold all the teams
