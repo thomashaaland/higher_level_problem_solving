@@ -252,7 +252,8 @@ def plot_NBA_player_statistics(teams, stat = "PPG"):
         stat (string): Determines which stat to plot.
     """
     # Change the width to make the plots easier to read
-    plt.rcParams["figure.figsize"] = (15,6)
+    fig = plt.figure(figsize = (15,6))
+    #plt.rcParams["figure.figsize"] = (15,6)
     count_so_far = 0
     all_names = []
 
