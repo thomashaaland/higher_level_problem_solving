@@ -5,9 +5,11 @@
 *.c
 *.so
 *.html
+*.pyc
 
 # Ignore specific cython build directories.
 assignment4/task-4.1/build/*
+
 
 # Ignore temporary and swap files.
 *~
