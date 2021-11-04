@@ -1,0 +1,7 @@
+# ignore all logs
+*.log
+
+# ignore cython compilation files
+*.c
+*.so
+*.html
