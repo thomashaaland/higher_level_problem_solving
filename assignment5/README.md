@@ -163,7 +163,7 @@ Example
 ```
 
 #### `find_dates(html_str, link=True)`
-```
+```python
     Finds dates on a webpage.
 
     The returned list is in the format yyyy/mm/dd
@@ -184,7 +184,7 @@ Example
 ```
 
 #### `extract_teams()`
-    ```python
+```python
     Extract team names and urls from the NBA Playoff 'Bracket'
     section table.
 
@@ -193,7 +193,7 @@ Example
        conference semifinals.
        team_urls (list): A list of absolute Wikipedia urls
        corresponding to team_names.
-    ```
+```
 
 
 #### `extract_players(team_url)`
@@ -215,10 +215,10 @@ Example:
     >>> example_team = 'https://en.wikipedia.org/wiki/Toronto_Raptors'
     >>> extract_players(example_team)
     (['Precious Achiuwa', 'Anunoby', 'Dalano Banton', 'Scottie Barnes', 'Khem Birch', 'Isaac Bonga', 'Chris Boucher', 'Justin Champagnie', 'Sam Dekker', 'Goran Dragi', 'Malachi Flynn', 'David Johnson', 'Sviatoslav Mykhailiuk', 'Pascal Siakam', 'Gary Trent Jr.', 'Fred Van Vleet', 'Yuta Watanabe'], ['https://en.wikipedia.org/wiki/Precious_Achiuwa', 'https://en.wikipedia.org/wiki/OG_Anunoby', 'https://en.wikipedia.org/wiki/Dalano_Banton', 'https://en.wikipedia.org/wiki/Scottie_Barnes', 'https://en.wikipedia.org/wiki/Khem_Birch', 'https://en.wikipedia.org/wiki/Isaac_Bonga', 'https://en.wikipedia.org/wiki/Chris_Boucher_(basketball)', 'https://en.wikipedia.org/wiki/Justin_Champagnie', 'https://en.wikipedia.org/wiki/Sam_Dekker', 'https://en.wikipedia.org/wiki/Goran_Dragi%C4%87', 'https://en.wikipedia.org/wiki/Malachi_Flynn', 'https://en.wikipedia.org/wiki/David_Johnson_(basketball)', 'https://en.wikipedia.org/wiki/Sviatoslav_Mykhailiuk', 'https://en.wikipedia.org/wiki/Pascal_Siakam', 'https://en.wikipedia.org/wiki/Gary_Trent_Jr.', 'https://en.wikipedia.org/wiki/Fred_VanVleet', 'https://en.wikipedia.org/wiki/Yuta_Watanabe'])
-    ```
+```
 
 #### `extract_player_statistics(player_url)`
-    ```python
+```python
     Extract player statistics for NBA player.
 
     Args:
@@ -234,10 +234,10 @@ Example:
     >>> example_player = 'https://en.wikipedia.org/wiki/Kyrie_Irving'
     >>> extract_player_statistics(example_player)
     (22.8, 0.4, 3.8)
-    ```
+```
 
 #### `init_search(start_url, end_url)`
-    ```python
+```python
     Starter function for search. Calls Breadth First Search algorithm since 
     websites are not weighted graphs and all vertices has the same cost.
     Args:
@@ -246,4 +246,4 @@ Example:
     Returns:
         :tuple: Returns a tuple with the traversed sites, including destination 
             and starting site.
-    ```
+```
