@@ -58,13 +58,20 @@ Example:
             
     return results
 
-def find_articles(html_str, output=None, ok_sites=["en", "no"]):
+def find_articles(html_str,
+                  output=None,
+                  ok_sites=["en", "no"],
+                  selected_language="en"):
     """
     Given a link to a webpage this function returns links to 
     (english and norvegian) wikipedia articles from that page.
     Args:
-        html_str :str: A link to a website as a string
-        output :str: Optional argument for writing results to file
+        html_str :str: A link to a website as a string.
+        output :str: Optional argument for writing results to file.
+        ok_sites :list (str): A list of languages accepted when 
+            finding wikipedia articles.
+        selected_language :str: Optional argument to specify the language 
+            of the base url (Assumes the base url is a wikipedia article).
     Returns:
         :list (str): The resulting list of links to wikipedia articles
 
@@ -84,7 +91,7 @@ Example
     # Only works on english and norwegian pages for now
     # Find ulrs starting with https://en.wikipedia.org/
     regex_for_wikis = r"^https:\/\/(" + "|".join(ok_sites) + ")\.wikipedia\.org[\/]?[^:]+$"
-    base_url = r"https://en.wikipedia.org"
+    base_url = rf"https://{selected_language}.wikipedia.org"
     urls = find_urls(html_str, base_url = base_url)
     results = [url for url in urls if re.findall(regex_for_wikis, url)]
     
