@@ -60,8 +60,8 @@ Example:
 
 def find_articles(html_str, output=None, ok_sites=["en", "no"]):
     """
-    Given a list of links to webpages this function returns links to 
-    (english and norvegian) wikipedia articles.
+    Given a link to a webpage this function returns links to 
+    (english and norvegian) wikipedia articles from that page.
     Args:
         html_str :str: A link to a website as a string
         output :str: Optional argument for writing results to file
