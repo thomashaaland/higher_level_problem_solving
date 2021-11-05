@@ -81,17 +81,22 @@ Some tests can be run using `py.test`. Additionally there are tests in the docs 
 To run as imported functions you can for example use `from requesting_urls import get_html` to import a function which fetches a html page of your choice and returns it as a string.
 
 The following functions can be imported and are ready to be used with simple user interfaces.
+
 `>>> from requesting_urls import`
 * `... get_html(url, params=None, output=None)`
+
 `>>> from filter_urls import`
 * `... find_urls(html_str, base_url="", output=None)
 * `... find_articles(html_str, output=None, ok_sites=["en", "no"], selected_language="en")
+
 `>>> from collect_dates import`
 * `... find_dates(html_str, link=True)`
+
 `>>> from fetch_player_statistics import`
 * `... extract_teams()`
 * `... extract_players(team_url)
 * `... extract_player_statistics(player_url)
+
 `>>> from wiki_race_challenge import`
 * `... init_search(start_url, end_url)
 
