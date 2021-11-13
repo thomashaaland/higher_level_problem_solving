@@ -36,7 +36,6 @@ def extract_teams():
     # indices used in the teams table
     seed = 0
     name = 1
-    won = 2
     
     for i in range(len(rows)):
         cells = rows[i].find_all("td")
@@ -221,7 +220,7 @@ Example:
     # Extract the scores from the different categories
     # Be sure that some values were extracted or return just 0's
     try:
-        scores = [row for row in rows if row[0].text.strip('\n') == "Career"]
+        scores = [row for row in rows if row[0].text.strip('\n') == "2020–21" or row[0].text.strip('\n') == "2020–21†"] #we were supposed to plot the players based on the 2020-21 season
         scores = scores[0]
     except:
         return ppg, bpg, rpg
