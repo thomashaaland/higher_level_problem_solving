@@ -34,7 +34,6 @@ def extract_teams():
     team_list = []
 
     # indices used in the teams table
-    seed = 0
     name = 1
     
     for i in range(len(rows)):
@@ -271,7 +270,6 @@ def plot_NBA_player_statistics(teams, stat = "PPG"):
     """
     # Change the width to make the plots easier to read
     fig = plt.figure(figsize = (15,6))
-    #plt.rcParams["figure.figsize"] = (15,6)
     count_so_far = 0
     all_names = []
 
@@ -296,7 +294,6 @@ def plot_NBA_player_statistics(teams, stat = "PPG"):
         # the position of bars is shifted by the number of players
         # so far
         x = range(count_so_far, count_so_far + len(players))
-        #count_so_far += len(players)
         count_so_far += len(players)
         # Make bars for this team's players ppg,
         # with the team name as the label
@@ -346,7 +343,6 @@ if __name__ =="__main__":
             # Save the stats in a dictionary
             player_dict = {"PPG":ppg, "BPG":bpg, "RPG":rpg}
             player_scores.append((player_name, player_dict))
-            #print(player_name)
             
         # Fill player dictionary with the 3 best players
         player_scores.sort(key = lambda x: x[1]["PPG"])
