@@ -29,20 +29,23 @@ app.mount(
     name="static",
 )
 
-@app.get("docs/")
+
+@app.get("/docs")
 def serve_doc_link():
     print("Docs")
     return "https://fastapi.tiangolo.com/"
 
+
 @app.get("/help/")
 def serve_help_link(request: Request):
     print("Help called")
-    return statics.TemplateResponse(
+    return static.TemplateResponse(
         "index.html",
         {
             "request": request,
         },
     )
+
 
 @app.get("/")
 def plot_reported_cases_per_million_html(request: Request):
@@ -73,8 +76,8 @@ def plot_reported_cases_per_million_json(countries: Optional[str] = None,
                                          ):
     """Return json chart from altair.
 
-    Return:
-        Chart (json): returns a json made from altair Chart.
+    Returns:
+        chart (json): returns a JSONable vega-lite structure made from altair Chart.
 
     """
     if countries:
@@ -96,23 +99,23 @@ def plot_reported_cases_per_million_json(countries: Optional[str] = None,
         num_roll_avg = None
 
     if cumulative == "true":
-        cumulataive = True
+        cumulative = True
     else:
         cumulative = None
-                
+
     chart = plot_reported_cases_per_million(countries, start, end,
                                             rolling_average, num_roll_avg,
                                             cumulative)
     return chart.to_dict()
 
-def main():
-    """Called when run as a script
 
+def main():
+    """Called when run as a script.
     Launces the web app.
     """
-    import uvicorn
-    uvicorn.run(app, debug = True)
 
+    import uvicorn
+    uvicorn.run(app, debug=True)
 
 if __name__ == "__main__":
     main()

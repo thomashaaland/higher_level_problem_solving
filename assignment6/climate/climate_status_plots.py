@@ -8,7 +8,7 @@ def get_data_from_csv():
     """Reads data from selected csv
     
     Returns:
-       A pandas dataframe
+       df(dataframe): A pandas dataframe
     """
     filepath = "./sample_data/"
     filename = filepath + "climate_data_combined.csv"

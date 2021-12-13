@@ -8,6 +8,9 @@ from bs4 import BeautifulSoup
 def get_anomaly_data_from_csv():
     """Creates a pandas dataframe from .csv file downloaded.
 
+    Returns:
+        df(dataframe): returns dataframe 
+
     """
     
     url = ("https://www.ncdc.noaa.gov/cag/global/"
@@ -25,7 +28,8 @@ def get_anomaly_data_from_csv():
 
 def get_mean_data_from_website():
     """Creating a dict from data scraped from website
-
+        Returns:
+            a dictionary with data for each month 
     """
     url = "https://www.ncdc.noaa.gov/monitoring-references/faq/anomalies.php#mean"
 
@@ -39,7 +43,7 @@ def get_mean_data_from_website():
     
     tables = soup.find(id="monitoring-content").find_all("table")
 
-    combined_table = tables[0]
+    combined_table = tables[2]
 
     combined_data = [data.text for data in combined_table.find_all("tr")[1].find_all("td")]
         
@@ -69,6 +73,7 @@ def write_data_to_disk(filename):
     data.to_csv(filename)
 
 def main():
+    print(get_mean_data_from_website())
     filepath = "./sample_data/"
     filename = filepath + "climate_data_combined.csv"
     write_data_to_disk(filename)
