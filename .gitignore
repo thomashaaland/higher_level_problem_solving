@@ -4,7 +4,7 @@
 # Ignore cython compilation files.
 *.c
 *.so
-*.html
+#*.html
 *.pyc
 
 # Ignore specific cython build directories.

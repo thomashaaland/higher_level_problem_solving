@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Altair Plot</title>
+    <style>
+      .error {
+          color: red;
+      }
+      #plots {
+	  display: flex;
+      }
+      .dropdown {
+	  display: inline-block;
+	  position: relative;
+      }
+      .dropdown-content {
+	  display: none;
+	  position: absolute;
+	  width: max-content;
+	  overflow: auto;
+	  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      }
+      .dropdown:hover .dropdown-content {
+	  display: block;
+      }
+      .dropdown-content option {
+	  display: block;
+	  color: #000000;
+	  padding: 5px;
+	  text-decoration: none;
+      }
+      .dropdown-content option:hover {
+	  color: #FFFFFF;
+	  background-color: #00A4BD;
+      }
+      .dropdown-content option:checked {
+	  color: #FFFFFF;
+	  background-color: #110BCF
+      }
+      .button {
+	  border: none;
+	  display: inline-block;
+	  background-color: #600000;
+	  color: #FFFFFF;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+	  font-family: Arial, Helvetica, sans-serif;
+      }
+      .button:hover {
+	  background-color: #000000;
+      }
+      .topnav {
+	  font-family: Arial, Helvetica, sans-serif;
+      }
+      ul {
+	  list-style-type: none;
+	  margin: 0;
+	  padding: 0;
+	  overflow: hidden;
+	  background-color: #333;
+      }
+      li {
+	  float: left;
+      }
+      li a {
+	  display: block;
+	  color: white;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+      }
+      li a:hover {
+	  background-color: #111;
+      }
+      .active {
+	  background-color: #600000;
+      }
+      .header {
+	  font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+    <!-- Initialize vega-lite to allow for plotting -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm//vega@5">
+    </script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1">
+    </script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm//vega-embed@6">
+    </script>
+  </head>
+  <!-- The body starts here -->
+  <body>
+    <!-- Add navigation bar -->
+    <div class="topnav">
+      <ul>
+	<li><a class="active" href="/">Home</a></li>
+	<li><a href="docs/">FastAPI Docs</a></li>
+	<li><a href="help/">Help</a></li>
+      </ul>
+    </div>
+    <br>
+    <div class="header">
+      <h1>Daily Covid Cases By Country</h1>
+    </div>
+    <!-- Make the plot -->
+    <div id="plot">
+      <div id="altair-plot"></div>
+    </div>
+    
+    <!-- This form is connected to the refresh button. Fill in all you'd 
+	 like here to get the complete plot -->
+    <form action="javascript:refreshPlot()" id="covid-form">
+      <!-- control whether we want rolling average or not and for how many days 
+	   the rolling average should cover -->
+      <div class="dropdown">
+	<select name="select-mode" id="select-mode" onchange="refreshPlot()">
+	  <option name="normal-checkbox" id="normal-checkbox">
+	    Daily new cases</option>
+	  <option name="rolling-average-checkbox" id="rolling-average-checkbox">
+	    Rolling average</option>
+	  <option name="cumulative-checkbox" id="cumulative-checkbox">
+	    Cumulative plot</option>
+	</select>
+      </div>
+      <div class="rolling-average-slider-container">
+	<input type="range" min="0" max="10" value="3"
+	       class="slider" name="rolling-average-slider"
+	       id="rolling-average-slider" onchange="refreshPlot()">
+      </div>
+      
+      <!-- Section containing the startDate.
+	   Currently only supports text input -->
+      <table name="date-selecter">
+	<tr>
+	  <td>
+	    Start date:
+	  </td>
+	  <td id="startDateCell">
+	    <input type="date" name="startDate" id="startDate"
+		   value="{{ start_time }}" start="{{ start_time }}"
+		   min="{{ start_time }}" max="{{ end_time }}"
+		   onchange="refreshPlot();"/>
+	  </td>
+	</tr>
+	<tr>
+	  <!-- Section containing the endDate.
+	       Currently only supports text input -->
+	  <td>
+	    End date:
+	  </td>
+	  <td id="endDateCell">
+	    <input type="date" name="endDate" id="endDate"
+		   value="{{ end_time }}" end="{{ end_time }}"
+		   min="{{ start_time }}" max="{{ end_time }}"
+		   onchange="refreshPlot();"/>
+	  </td>
+	</tr>
+      </table>
+      <!-- Populate a series of checkboxes to allow for selecting countries. -->
+      <div class="dropdown">
+	<button class="button">List of Countries</button>
+	<div class="dropdown-content">
+	  <select name="select-countries" id="select-countries" multiple="multiple">
+	    {% for country in countries %}
+	    <option value="{{ country }}">{{ country }}</option>
+	    {% endfor %}
+	  </select>
+	</div>
+      </div>
+      <!-- The submit button. The centerpiece. -->
+      <button class="button" type="submit">Refresh</button>
+    </form>
+    
+    <script>      
+      async function refreshPlot() {
+	  // get selected country checkboxes
+	  var selected_countries = []
+	  for (var option of document.getElementById('select-countries').options) {
+	      if (option.selected) {
+		  selected_countries.push(option.value);
+	      }
+	  }
+
+	  // Manage dates
+	  // Get the elements
+	  var startTimeElement = document.getElementById('startDate')
+	  var endTimeElement = document.getElementById('endDate')
+
+	  // Get the element value
+	  var startTime = startTimeElement.value;
+	  var endTime = endTimeElement.value;
+
+	  // Set the max and min values of the calendars
+	  startTimeElement.max = endTime;
+	  endTimeElement.min = startTime;
+
+	  // Manage rolling average
+	  // Get rolling average objects
+	  var rollingAverageCheckbox = document.getElementById("rolling-average-checkbox");
+	  var rollingAverageSlider = document.getElementById("rolling-average-slider");
+
+	  var rollAvgChk = rollingAverageCheckbox.selected
+	  var rollAvgSld = rollingAverageSlider.value
+
+	  // Disable and enable rolling average slider
+	  if (rollAvgChk == true) {
+	      rollingAverageSlider.disabled = false;
+	  } else {
+	      rollingAverageSlider.disabled = true;
+	  }
+
+	  // Manage cumulative plotting
+	  var cumulativePlotCheckbox = document.getElementById("cumulative-checkbox");
+	  
+	  var cumChk = cumulativePlotCheckbox.selected
+
+	  // Ready date to be sent to server
+	  var countryParam = "?countries=" + encodeURIComponent(selected_countries.join(","));
+	  var startParam = "&start=" + encodeURIComponent(startTime);
+	  var endParam = "&end=" + encodeURIComponent(endTime);
+	  var rollingAverageBoolParam = "&rolling_average=" + encodeURIComponent(rollAvgChk);
+	  var rollingAverageSliderParam = "&num_roll_avg=" + encodeURIComponent(rollAvgSld);
+	  var cumulativeParam = "&cumulative=" + encodeURIComponent(cumChk);
+	  
+	  // update the altair plot
+	  var response = await fetch("/plot_reported_cases_per_million.json"
+				     + countryParam
+				     + startParam
+				     + endParam
+				     + rollingAverageBoolParam
+				     + rollingAverageSliderParam
+				     + cumulativeParam
+				    );
+	  var spec = await response.json();
+	  
+	  var embedOpt = { mode: "vega-lite" };
+	  
+	  function showError(el, error){
+              el.innerHTML =
+		  '<div class="error" style="color:red;">'
+		  + '<p>JavaScript Error: ' + error.message + '</p>'
+		  + "<p>This usually means there's a typo in your chart specification. "
+		  + "See the javascript console for the full traceback.</p>"
+		  + '</div>';
+              throw error;
+	  }
+	  const el = document.getElementById("vis");
+	  vegaEmbed("#altair-plot", spec, embedOpt).catch((error) =>
+	      showError(el, error)
+	  );
+      }
+      
+
+      // trigger a first refresh of the plots on page load
+      refreshPlot();
+    </script>
+  </body>
+</html> 

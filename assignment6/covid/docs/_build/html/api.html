@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webvisualization API &#8212; Web Visualization 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Web Visualization’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-webvisualization_plots">
+<span id="webvisualization-api"></span><h1>Webvisualization API<a class="headerlink" href="#module-webvisualization_plots" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="webvisualization_plots.get_data_from_csv">
+<span class="sig-prename descclassname"><span class="pre">webvisualization_plots.</span></span><span class="sig-name descname"><span class="pre">get_data_from_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">countries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#webvisualization_plots.get_data_from_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates pandas dataframe from .csv file.</p>
+<p>Data will be filtered based on data column name, list of countries to be plotted
+and time frame chosen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>columns-</strong> (<em>list</em><em>(</em><em>string</em><em>)</em>) – a list of data columns you want to include</p></li>
+<li><p><strong>countries</strong> (<em>(</em><em>list</em><em>(</em><em>string</em><em>)</em><em>, </em><em>optional</em>) – List of countries you want to include.</p></li>
+<li><p><strong>passed</strong> (<em>If none is</em>) – </p></li>
+<li><p><strong>the</strong> (<em>dataframe should be filtered for the 6 countries with</em>) – </p></li>
+<li><p><strong>in</strong> (<em>highest number of cases per million at the last current date available</em>) – </p></li>
+<li><p><strong>chosen.</strong> (<em>the timeframe</em>) – </p></li>
+<li><p><strong>start</strong> (<em>string</em><em>, </em><em>optional</em>) – The first date to include in the returned dataframe.
+If specified, records earlier than this will be excluded.
+Default: include earliest date
+Example format: “2021-10-10”</p></li>
+<li><p><strong>end</strong> (<em>string</em><em>, </em><em>optional</em>) – The latest date to include in the returned data frame.
+If specified, records later than this will be excluded.
+Example format: “2021-10-10”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>returns dataframe for the timeframe, columns, and
+countries chosen</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>cases_df (dataframe)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="webvisualization_plots.get_countries">
+<span class="sig-prename descclassname"><span class="pre">webvisualization_plots.</span></span><span class="sig-name descname"><span class="pre">get_countries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#webvisualization_plots.get_countries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all countries in the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>All countries in the dataset.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="webvisualization_plots.get_times">
+<span class="sig-prename descclassname"><span class="pre">webvisualization_plots.</span></span><span class="sig-name descname"><span class="pre">get_times</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#webvisualization_plots.get_times" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all dates in the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list(numpy.datetime64)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="webvisualization_plots.plot_reported_cases_per_million">
+<span class="sig-prename descclassname"><span class="pre">webvisualization_plots.</span></span><span class="sig-name descname"><span class="pre">plot_reported_cases_per_million</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">countries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rolling_average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_roll_avg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumulative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#webvisualization_plots.plot_reported_cases_per_million" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots data of reported covid-19 cases per million using altair.</p>
+<p>Calls the function get_data_from_csv to receive a dataframe used for plotting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>countries</strong> (<em>(</em><em>list</em><em>(</em><em>string</em><em>)</em><em>, </em><em>optional</em>) – List of countries you want to filter.
+If none is passed, dataframe will be filtered for the 6 countries with
+the highest number of cases per million at the last current date
+available in the timeframe chosen.</p></li>
+<li><p><strong>start</strong> (<em>string</em><em>, </em><em>optional</em>) – a string of the start date of the table, none
+of the dates will be older then this on.</p></li>
+<li><p><strong>end</strong> (<em>string</em><em>, </em><em>optional</em>) – a string of the en date of the table, none of
+the dates will be newer then this one.</p></li>
+<li><p><strong>rolling_average</strong> (<em>string</em><em>, </em><em>optional</em>) – Takes the values false or true if
+any value. If true turns on rolling average.</p></li>
+<li><p><strong>num_roll_avg</strong> (<em>string</em><em>, </em><em>optional</em>) – Takes a string representation of an
+integer. This is the number of days on both back in time and ahead
+in time to average over.</p></li>
+<li><p><strong>cumulative=</strong> (<em>string</em><em>, </em><em>optional</em>) – Takes a string representation of a
+boolean ‘true’ or ‘false’. If true is listed also supply a cumulative
+plot.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>altair Chart of number of reported covid-19 cases over time.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="webvisualization_plots.main">
+<span class="sig-prename descclassname"><span class="pre">webvisualization_plots.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#webvisualization_plots.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function called when run as a script</p>
+<p>Creates a chart and display it or save it to a file</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-prename descclassname"><span class="pre">webvisualization_plots.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function called when run as a script</p>
+<p>Creates a chart and display it or save it to a file</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Web Visualization</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Webvisualization API</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Web Visualization’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Thomas Haaland.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
