@@ -57,7 +57,6 @@ def extract_events(url):
     # for Event, Venue, and Type (discipline)
 
     found_event = None
-    found_date = None
     found_venue = None
     found_discipline = None
     # Saving all necessary values in the list under
@@ -70,7 +69,6 @@ def extract_events(url):
     # short_row_length means a repeated venue, which
     # should be reused from the previous iteration
     short_row_length = full_row_length - 2
-    venue_span_rows = 0
 
     for row in rows:        
         cells = row.find_all("td")
